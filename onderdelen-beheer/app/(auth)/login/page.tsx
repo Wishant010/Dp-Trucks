@@ -20,17 +20,21 @@ export default function LoginPage() {
 
     // Simple demo authentication - in production use environment variable
     if (code === "demo2024" || code === process.env.NEXT_PUBLIC_ACCESS_CODE) {
+      // Set cookie for middleware
+      document.cookie = "authenticated=true; path=/; max-age=86400"
       localStorage.setItem("authenticated", "true")
       toast.success("Welkom terug!")
-      router.push("/")
+
+      // Force navigation with window.location for cookie to take effect
+      window.location.href = "/"
     } else {
       toast.error("Onjuiste toegangscode")
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">

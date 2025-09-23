@@ -31,32 +31,32 @@ export const useOnderdelen = create<OnderdelenStore>((set, get) => ({
   searchQuery: '',
   selectedCategory: null,
   
-  setOnderdelen: (onderdelen) => set({ onderdelen }),
-  setCategories: (categories) => set({ categories }),
-  setLoading: (loading) => set({ loading }),
-  setError: (error) => set({ error }),
-  setSearchQuery: (query) => set({ searchQuery: query }),
-  setSelectedCategory: (category) => set({ selectedCategory: category }),
+  setOnderdelen: (onderdelen: Onderdeel[]) => set({ onderdelen }),
+  setCategories: (categories: Categorie[]) => set({ categories }),
+  setLoading: (loading: boolean) => set({ loading }),
+  setError: (error: string | null) => set({ error }),
+  setSearchQuery: (query: string) => set({ searchQuery: query }),
+  setSelectedCategory: (category: string | null) => set({ selectedCategory: category }),
   
-  addOnderdeel: (onderdeel) => 
-    set((state) => ({ onderdelen: [...state.onderdelen, onderdeel] })),
+  addOnderdeel: (onderdeel: Onderdeel) => 
+    set((state: OnderdelenStore) => ({ onderdelen: [...state.onderdelen, onderdeel] })),
   
-  updateOnderdeel: (id, updates) =>
-    set((state) => ({
-      onderdelen: state.onderdelen.map((o) =>
+  updateOnderdeel: (id: string, updates: Partial<Onderdeel>) =>
+    set((state: OnderdelenStore) => ({
+      onderdelen: state.onderdelen.map((o: Onderdeel) =>
         o.id === id ? { ...o, ...updates } : o
       ),
     })),
   
-  deleteOnderdeel: (id) =>
-    set((state) => ({
-      onderdelen: state.onderdelen.filter((o) => o.id !== id),
+  deleteOnderdeel: (id: string) =>
+    set((state: OnderdelenStore) => ({
+      onderdelen: state.onderdelen.filter((o: Onderdeel) => o.id !== id),
     })),
   
   getFilteredOnderdelen: () => {
     const { onderdelen, searchQuery, selectedCategory } = get()
     
-    return onderdelen.filter((onderdeel) => {
+    return onderdelen.filter((onderdeel: Onderdeel) => {
       const matchesSearch = !searchQuery || 
         onderdeel.naam.toLowerCase().includes(searchQuery.toLowerCase()) ||
         onderdeel.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -68,4 +68,4 @@ export const useOnderdelen = create<OnderdelenStore>((set, get) => ({
       return matchesSearch && matchesCategory && onderdeel.actief
     })
   },
-}))
+}) as OnderdelenStore)

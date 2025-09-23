@@ -5,6 +5,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { FileText, Download, TrendingUp, Package, Euro, Calendar } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
+import "./progress.css"
+
+// Progress bar component to avoid inline styles
+const ProgressBar = ({ percentage }: { percentage: number }) => {
+  const safePercentage = Math.min(100, Math.max(0, percentage))
+  
+  // Create width classes dynamically
+  const getWidthClass = (percent: number) => {
+    if (percent >= 90) return "w-full"
+    if (percent >= 75) return "w-4/5"
+    if (percent >= 50) return "w-3/5"
+    if (percent >= 25) return "w-2/5"
+    if (percent >= 10) return "w-1/5"
+    return "w-1/12"
+  }
+  
+  return (
+    <div className="flex-1 bg-gray-200 rounded-full h-2 relative overflow-hidden">
+      <div 
+        className={`absolute left-0 top-0 bg-primary h-full rounded-full transition-all duration-300 ${getWidthClass(safePercentage)}`}
+      />
+    </div>
+  )
+}
 
 export default function RapportenPage() {
   const [selectedPeriod, setSelectedPeriod] = useState<'dag' | 'week' | 'maand' | 'jaar'>('maand')
@@ -151,12 +175,7 @@ export default function RapportenPage() {
                     <p className="font-semibold">{formatCurrency(cat.omzet)}</p>
                   </div>
                   <div className="flex items-center gap-2 mt-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-primary h-2 rounded-full"
-                        style={{ width: `${(cat.verkocht / cat.items) * 100}%` }}
-                      />
-                    </div>
+                    <ProgressBar percentage={(cat.verkocht / cat.items) * 100} />
                     <span className="text-xs text-muted-foreground">
                       {Math.round((cat.verkocht / cat.items) * 100)}%
                     </span>

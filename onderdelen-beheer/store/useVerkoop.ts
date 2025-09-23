@@ -29,19 +29,19 @@ export const useVerkoop = create<VerkoopStore>((set, get) => ({
   verkopen: [],
   loading: false,
   
-  addToCart: (onderdeel, aantal, prijs) => {
-    const existingItem = get().cart.find(item => item.onderdeel.id === onderdeel.id)
+  addToCart: (onderdeel: Onderdeel, aantal: number, prijs?: number) => {
+    const existingItem = get().cart.find((item: CartItem) => item.onderdeel.id === onderdeel.id)
     
     if (existingItem) {
-      set((state) => ({
-        cart: state.cart.map(item =>
+      set((state: VerkoopStore) => ({
+        cart: state.cart.map((item: CartItem) =>
           item.onderdeel.id === onderdeel.id
             ? { ...item, aantal: item.aantal + aantal }
             : item
         ),
       }))
     } else {
-      set((state) => ({
+      set((state: VerkoopStore) => ({
         cart: [...state.cart, {
           onderdeel,
           aantal,
@@ -51,14 +51,14 @@ export const useVerkoop = create<VerkoopStore>((set, get) => ({
     }
   },
   
-  removeFromCart: (onderdeelId) =>
-    set((state) => ({
-      cart: state.cart.filter(item => item.onderdeel.id !== onderdeelId),
+  removeFromCart: (onderdeelId: string) =>
+    set((state: VerkoopStore) => ({
+      cart: state.cart.filter((item: CartItem) => item.onderdeel.id !== onderdeelId),
     })),
   
-  updateCartItem: (onderdeelId, aantal, prijs) =>
-    set((state) => ({
-      cart: state.cart.map(item =>
+  updateCartItem: (onderdeelId: string, aantal: number, prijs?: number) =>
+    set((state: VerkoopStore) => ({
+      cart: state.cart.map((item: CartItem) =>
         item.onderdeel.id === onderdeelId
           ? { ...item, aantal, prijs: prijs || item.prijs }
           : item
@@ -69,16 +69,16 @@ export const useVerkoop = create<VerkoopStore>((set, get) => ({
   
   getCartTotal: () => {
     const { cart } = get()
-    return cart.reduce((total, item) => total + (item.prijs * item.aantal), 0)
+    return cart.reduce((total: number, item: CartItem) => total + (item.prijs * item.aantal), 0)
   },
   
   getCartCount: () => {
     const { cart } = get()
-    return cart.reduce((count, item) => count + item.aantal, 0)
+    return cart.reduce((count: number, item: CartItem) => count + item.aantal, 0)
   },
   
-  setVerkopen: (verkopen) => set({ verkopen }),
+  setVerkopen: (verkopen: Verkoop[]) => set({ verkopen }),
   
-  addVerkoop: (verkoop) =>
-    set((state) => ({ verkopen: [verkoop, ...state.verkopen] })),
-}))
+  addVerkoop: (verkoop: Verkoop) =>
+    set((state: VerkoopStore) => ({ verkopen: [verkoop, ...state.verkopen] })),
+}) as VerkoopStore)

@@ -10,7 +10,7 @@ interface AuthStore {
   setUser: (user: User | null) => void
 }
 
-export const useAuth = create<AuthStore>(
+export const useAuth = create<AuthStore>()(
   persist(
     (set) => ({
       user: null,
@@ -19,7 +19,7 @@ export const useAuth = create<AuthStore>(
       login: async (code: string) => {
         // Simple access code check
         if (code === process.env.NEXT_PUBLIC_ACCESS_CODE || code === 'demo2024') {
-          const user = {
+          const user: User = {
             id: 'single-user',
             authenticated: true,
           }
@@ -33,7 +33,7 @@ export const useAuth = create<AuthStore>(
         set({ user: null, isAuthenticated: false })
       },
       
-      setUser: (user) => {
+      setUser: (user: User | null) => {
         set({ user, isAuthenticated: !!user })
       },
     }),

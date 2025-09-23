@@ -9,8 +9,13 @@ export const metadata: Metadata = {
   title: "Onderdelen Beheer - Voorraadsysteem",
   description: "Compleet voorraadbeheersysteem voor onderdelenverkoop",
   manifest: "/manifest.json",
+}
+
+export const viewport = {
   themeColor: "#3B82F6",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({

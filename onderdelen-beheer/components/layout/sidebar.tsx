@@ -30,6 +30,8 @@ export function Sidebar() {
   const pathname = usePathname()
 
   const handleLogout = () => {
+    // Clear both cookie and localStorage
+    document.cookie = "authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"
     localStorage.removeItem("authenticated")
     window.location.href = "/login"
   }
