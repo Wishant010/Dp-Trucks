@@ -1,0 +1,44 @@
+{
+  "name": "Onderdelen Beheer Systeem",
+  "short_name": "Voorraad",
+  "description": "Compleet voorraadbeheersysteem voor onderdelenverkoop",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Sale",
+      "short_name": "Verkoop",
+      "url": "/verkoop",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Voorraad Check",
+      "short_name": "Voorraad",
+      "url": "/voorraad",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Nieuw Onderdeel",
+      "short_name": "Toevoegen",
+      "url": "/onderdelen/nieuw",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
