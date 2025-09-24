@@ -21,7 +21,7 @@ CREATE TABLE onderdelen (
   -- Prijzen
   inkoop_prijs DECIMAL(10,2) DEFAULT 0,
   verkoop_prijs DECIMAL(10,2) NOT NULL,
-  
+
   -- Voorraad
   voorraad INTEGER DEFAULT 0,
   min_voorraad INTEGER DEFAULT 5,
@@ -38,7 +38,7 @@ CREATE TABLE onderdelen (
   -- Status
   actief BOOLEAN DEFAULT true,
   laatste_verkoop TIMESTAMP,
-  
+
   -- Timestamps
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
@@ -48,22 +48,22 @@ CREATE TABLE onderdelen (
 CREATE TABLE verkopen (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   onderdeel_id UUID REFERENCES onderdelen(id) ON DELETE CASCADE,
-  
+
   -- Verkoop details
   aantal INTEGER NOT NULL,
   stuk_prijs DECIMAL(10,2) NOT NULL,
   totaal_prijs DECIMAL(10,2) NOT NULL,
   inkoop_prijs DECIMAL(10,2), -- Voor winstberekening
-  
+
   -- Klant info (optioneel)
   klant_naam VARCHAR(100),
   klant_telefoon VARCHAR(20),
   klant_email VARCHAR(100),
-  
+
   -- Extra
   betaalmethode VARCHAR(20) DEFAULT 'contant',
   notities TEXT,
-  
+
   -- Timestamps
   verkocht_op TIMESTAMP DEFAULT NOW()
 );
@@ -75,14 +75,14 @@ CREATE TABLE voorraad_logs (
   oude_voorraad INTEGER,
   nieuwe_voorraad INTEGER,
   verschil INTEGER,
-  reden VARCHAR(50), -- 'verkoop', 'inkoop', 'correctie', 'retour'
+  reden VARCHAR(50), -- 'inkoop', 'correctie', 'retour', 'gebruik'
   notities TEXT,
   created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- Dashboard stats view
 CREATE VIEW dashboard_stats AS
-SELECT 
+SELECT
   (SELECT COUNT(*) FROM onderdelen WHERE actief = true) as totaal_onderdelen,
   (SELECT SUM(voorraad * verkoop_prijs) FROM onderdelen WHERE actief = true) as voorraad_waarde,
   (SELECT COUNT(*) FROM onderdelen WHERE voorraad <= min_voorraad AND actief = true) as lage_voorraad,

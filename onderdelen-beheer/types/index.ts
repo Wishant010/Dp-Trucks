@@ -50,7 +50,7 @@ export interface VoorraadLog {
   oude_voorraad: number
   nieuwe_voorraad: number
   verschil: number
-  reden: 'verkoop' | 'inkoop' | 'correctie' | 'retour'
+  reden: 'inkoop' | 'correctie' | 'retour' | 'gebruik'
   notities?: string
   created_at: string
 }

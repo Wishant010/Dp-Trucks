@@ -1,4 +1,0 @@
-/* Progress bar styles */
-.progress-bar {
-  width: var(--progress-width, 0%);
-}

@@ -1,13 +1,13 @@
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import autoTable from 'jspdf-autotable'
 import { format } from 'date-fns'
 import { nl } from 'date-fns/locale'
 import type { Verkoop, Onderdeel } from '@/types'
 
+// Extend jsPDF type
 declare module 'jspdf' {
   interface jsPDF {
-    autoTable: (options: any) => jsPDF
-    lastAutoTable: {
+    lastAutoTable?: {
       finalY: number
     }
   }
@@ -111,7 +111,7 @@ export class PDFGenerator {
       v.betaalmethode
     ])
 
-    this.doc.autoTable({
+    autoTable(this.doc, {
       startY: yPos + 40,
       head: [['Datum', 'Product', 'Aantal', 'Prijs/stuk', 'Totaal', 'Klant', 'Betaling']],
       body: tableData,
@@ -131,7 +131,7 @@ export class PDFGenerator {
     })
 
     // Legal footer
-    const finalY = this.doc.lastAutoTable.finalY + 20
+    const finalY = (this.doc as any).lastAutoTable.finalY + 20
     this.doc.setFontSize(8)
     this.doc.setTextColor(100)
     this.doc.text('Dit document is automatisch gegenereerd en rechtsgeldig zonder handtekening.', 20, finalY)
@@ -183,7 +183,7 @@ export class PDFGenerator {
       o.voorraad <= o.min_voorraad ? 'LAAG' : 'OK'
     ])
 
-    this.doc.autoTable({
+    autoTable(this.doc, {
       startY: yPos + 50,
       head: [['SKU', 'Product', 'Voorraad', 'Min', 'Inkoop', 'Verkoop', 'Waarde', 'Locatie', 'Status']],
       body: tableData,
@@ -315,7 +315,7 @@ export class PDFGenerator {
       o.locatie || '-'
     ])
 
-    this.doc.autoTable({
+    autoTable(this.doc, {
       startY: yPos + 40,
       head: [['SKU', 'Product', 'Voorraad', 'Prijs', 'Waarde', 'Laatste verkoop', 'Locatie']],
       body: tableData,

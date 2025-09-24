@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import {
   Package,
-  ShoppingCart,
   BarChart3,
   Boxes,
   FileText,
@@ -21,7 +20,6 @@ const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
   { name: "Onderdelen", href: "/onderdelen", icon: Package },
   { name: "Nieuw Onderdeel", href: "/onderdelen/nieuw", icon: Plus },
-  { name: "Verkoop", href: "/verkoop", icon: ShoppingCart },
   { name: "Voorraad", href: "/voorraad", icon: Boxes },
   { name: "Rapporten", href: "/rapporten", icon: BarChart3 },
 ]

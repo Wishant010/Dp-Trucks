@@ -1,13 +1,12 @@
 # Onderdelen Beheer Systeem
 
-Een volledig gratis te hosten voorraadbeheersysteem voor onderdelenverkoop. Perfect voor kleine bedrijven en single-user gebruik.
+Een volledig gratis te hosten voorraadbeheersysteem voor onderdelen. Perfect voor kleine bedrijven en persoonlijk gebruik.
 
 ## 🚀 Features
 
 - 📊 **Dashboard** - Real-time statistieken en overzichten
 - 📦 **Voorraadbeheer** - Compleet onderdelenbeheer met SKU en barcode support
-- 🛒 **POS Systeem** - Quick sale interface voor snelle verkopen
-- 📈 **Rapportages** - Uitgebreide verkoop- en voorraadrapportages
+-  **Rapportages** - Uitgebreide voorraadrapportages en Excel exports
 - 📨 **Waarschuwingen** - Automatische meldingen bij lage voorraad
 - 📱 **PWA** - Installeerbaar als app op telefoon/tablet
 - 🔒 **Authenticatie** - Simpele toegangscode beveiliging
