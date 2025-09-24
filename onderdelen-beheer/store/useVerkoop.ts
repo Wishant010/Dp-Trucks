@@ -81,4 +81,4 @@ export const useVerkoop = create<VerkoopStore>((set, get) => ({
   
   addVerkoop: (verkoop: Verkoop) =>
     set((state: VerkoopStore) => ({ verkopen: [verkoop, ...state.verkopen] })),
-}) as VerkoopStore)
+}))

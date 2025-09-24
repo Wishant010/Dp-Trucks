@@ -1,4 +1,6 @@
 // Global type declarations for packages that may not have proper type definitions
+/// <reference types="react" />
+/// <reference types="react-dom" />
 
 declare module 'minimatch' {
   export = minimatch;

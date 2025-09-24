@@ -68,4 +68,4 @@ export const useOnderdelen = create<OnderdelenStore>((set, get) => ({
       return matchesSearch && matchesCategory && onderdeel.actief
     })
   },
-}) as OnderdelenStore)
+}))

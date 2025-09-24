@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,7 +14,7 @@ export default function LoginPage() {
   const [code, setCode] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault()
     setLoading(true)
 
@@ -56,11 +56,10 @@ export default function LoginPage() {
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  id="code"
                   type="password"
                   placeholder="Voer toegangscode in"
                   value={code}
-                  onChange={(e) => setCode(e.target.value)}
+                  onChange={(e: any) => setCode(e.target.value)}
                   className="pl-10"
                   required
                 />

@@ -12,7 +12,7 @@ interface AuthStore {
 
 export const useAuth = create<AuthStore>()(
   persist(
-    (set) => ({
+    (set, _get) => ({
       user: null,
       isAuthenticated: false,
       
